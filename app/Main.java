@@ -1,18 +1,16 @@
 package app;
+import app.model.User;
 import validation.Validation;
+import validation.Validations;
 import validation.ValidationResult.ValidationResult;
 import validation.impl.IsNotEmptyValidation;
 import validation.impl.IsPhoneNumberValidation;
 public class Main {
     public static void main(String[] args) {
-        Validation isNotEmptyValidation = new IsNotEmptyValidation();
-        Validation isPhoneNumberValidation = new IsPhoneNumberValidation(isNotEmptyValidation);
+        
+        User user = new User("", "");
 
-        ValidationResult result = isPhoneNumberValidation.validate("1231231231", "name");
-        if(result.isValid()){
-            System.out.println("Valid");
-        }else{
-            System.out.println(result.getReason());
-        }
+        Validations validations = Validations.getInstance();
+        validations.validates(user);
     }
 }

@@ -1,6 +1,9 @@
 package validation.impl;
 
+import java.lang.reflect.Field;
+
 import validation.Validation;
+import validation.annotation.IsPhoneNumber;
 
 public class IsPhoneNumberValidation extends Validation{
 
@@ -14,8 +17,9 @@ public class IsPhoneNumberValidation extends Validation{
     }
 
     @Override
-    protected String getReason(String field) {
-        return field + " is not phone number!";
+    protected String getReason(Field field) {
+        IsPhoneNumber annotation = field.getAnnotation(IsPhoneNumber.class);
+        return annotation.message();
 
     }
 

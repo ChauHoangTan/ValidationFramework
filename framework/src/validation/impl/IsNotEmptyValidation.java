@@ -1,6 +1,9 @@
 package validation.impl;
 
+import java.lang.reflect.Field;
+
 import validation.Validation;
+import validation.annotation.IsNotEmpty;
 
 public class IsNotEmptyValidation extends Validation {
 
@@ -13,8 +16,9 @@ public class IsNotEmptyValidation extends Validation {
     }
 
     @Override
-    protected String getReason(String field) {
-        return field + " is required";
+    protected String getReason(Field field) {
+        IsNotEmpty annotation = field.getAnnotation(IsNotEmpty.class);
+        return  annotation.message();
     }
 
     // self decorator
