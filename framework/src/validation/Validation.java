@@ -23,20 +23,20 @@ public abstract class Validation {
         if(childValidation != null){
             ValidationResult chikValidationResult = childValidation.validate(value, field);
             if(chikValidationResult.isValid()){
-                if(isValid(value)){
+                if(isValid(value, field)){
                     return ValidationResult.valid();
                 }else{
                     return ValidationResult.inValid(fieldName, getReason(field));
                 }
             }else{
-                if(isValid(value)){
+                if(isValid(value, field)){
                     return ValidationResult.inValid(fieldName, chikValidationResult.getReason() );
                 }else{
                     return ValidationResult.inValid(fieldName, getReason(field) +"\n" + chikValidationResult.getReason());
                 }
             }
         }else{
-            if(isValid(value)){
+            if(isValid(value, field)){
                 return ValidationResult.valid();
             }else{
                 return ValidationResult.inValid(fieldName, getReason(field));
@@ -48,5 +48,7 @@ public abstract class Validation {
 
     protected abstract String getReason(Field field);
 
-    protected abstract Boolean isValid(String value);
+    protected abstract Boolean isValid(String value); // need field in some case
+
+    protected abstract Boolean isValid(String value, Field field);
 }

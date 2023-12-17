@@ -5,8 +5,7 @@ import java.util.Map;
 
 import validation.Validation;
 import validation.ValidationType;
-import validation.impl.IsNotEmptyValidation;
-import validation.impl.IsPhoneNumberValidation;
+import validation.impl.*;
 
 public class ValidationFactory{
     private static Map<String, Validation> validationList = new HashMap<String, Validation>();
@@ -21,6 +20,18 @@ public class ValidationFactory{
                     break;
                 case ValidationType.isPhoneNumber:
                     validation = new IsPhoneNumberValidation(childValidation);
+                    break;
+                case ValidationType.isMaxLength:
+                    validation = new IsMaxLengthValidation(childValidation);
+                    break;
+                case ValidationType.isMinLength:
+                    validation = new IsMinLengthValidation(childValidation);
+                    break;
+                case ValidationType.isMaxValue:
+                    validation = new IsMaxValueValidation(childValidation);
+                    break;
+                case ValidationType.isMinValue:
+                    validation = new IsMinValueValidation(childValidation);
                     break;
                 default:
                     break;

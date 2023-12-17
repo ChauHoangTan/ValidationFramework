@@ -7,27 +7,32 @@ import validation.annotation.IsNotEmpty;
 
 public class IsNotEmptyValidation extends Validation {
 
-    public IsNotEmptyValidation(){
+    public IsNotEmptyValidation() {
 
     }
 
-    public IsNotEmptyValidation(Validation validation){
+    public IsNotEmptyValidation(Validation validation) {
         this.childValidation = validation;
     }
 
     @Override
     protected String getReason(Field field) {
         IsNotEmpty annotation = field.getAnnotation(IsNotEmpty.class);
-        return  annotation.message();
+        return annotation.message();
     }
 
     // self decorator
     @Override
     protected Boolean isValid(String value) {
-        if(value.trim().length() == 0){
+        if (value.trim().length() == 0) {
             return false;
         }
         return true;
     }
-    
+
+    @Override
+    protected Boolean isValid(String value, Field field) {
+        return isValid(value);
+    }
+
 }
