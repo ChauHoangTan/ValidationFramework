@@ -1,4 +1,4 @@
-package validation.errorResult;
+package validation.compositeErrorResult;
 
 public class ErrorInfo implements IComponent{
     private String fieldName;

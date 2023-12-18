@@ -3,8 +3,8 @@ package validation;
 import java.lang.reflect.Field;
 
 import validation.ValidationResult.ValidationResult;
+import validation.compositeErrorResult.*;
 import validation.factory.ValidationFactory;
-import validation.errorResult.*;
 
 import java.lang.annotation.Annotation;
 
@@ -38,7 +38,6 @@ public class Validations {
                 Validation newValidation = ValidationFactory
                         .createValidation(TrimValidationType(annotation.annotationType().toString()), validation);
                 validation = newValidation;
-                // TrimValidationType(annotation.annotationType().toString());
             }
             try {
                 Object valObject = field.get(object);
@@ -46,14 +45,12 @@ public class Validations {
                 if (result.isValid()) {
                     System.out.println(field.getName() + " " + "Valid");
                 } else {
-                    // System.out.println(result.getReason());
                     errorList.add(new ErrorInfo(field.getName(), result.getReason()));
                 }
             } catch (Exception e) {
                 // TODO: handle exception
             }
 
-            // validation.validate(field.get(object), field.getName());
         }
 
         // test composite

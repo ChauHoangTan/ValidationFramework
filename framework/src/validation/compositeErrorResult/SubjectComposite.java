@@ -1,7 +1,9 @@
-package validation.errorResult;
+package validation.compositeErrorResult;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import validation.observerNotification.SubjectNotification;
 
 public class SubjectComposite implements IComponent{
     private List<IComponent> listInvalid;
@@ -20,6 +22,9 @@ public class SubjectComposite implements IComponent{
             return;
         for(IComponent e : listInvalid)
             e.execute();
+        
+        SubjectNotification notification = SubjectNotification.getInstance();
+        notification.notifyToObserver(listInvalid);
     }
 
     public void add(IComponent errorResult){
