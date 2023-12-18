@@ -8,7 +8,8 @@ import validation.impl.IsPhoneNumberValidation;
 public class Main {
     public static void main(String[] args) {
         
-        User user = new User("", "");
+        // User user = new User("", "");
+        User user = new User("wwwwwwww", "bhbjbk", "", "");
 
         Validations validations = Validations.getInstance();
         validations.validates(user);
