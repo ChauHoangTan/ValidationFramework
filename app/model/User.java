@@ -6,12 +6,18 @@ import validation.annotation.*;;
 
 public class User {
 
-    @IsNotEmpty
+    @IsNotEmpty ( message =  "Is Required!")
+    @IsNoWhitespace
     private String name;
 
     @IsNotEmpty
     @IsPhoneNumber
     private String phoneNumber;
+
+    @IsNotEmpty
+    @IsEmailAddress
+    @IsNoWhitespace
+    private String emailAddress;
 
     @IsNotEmpty
     @IsMaxLength
@@ -29,10 +35,12 @@ public class User {
     @IsMinValue
     private String minValueField;
 
-    public User(String name, String phoneNumber) {
+    public User(String name, String phoneNumber, String emailAddress) {
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
     }
+
 
     public User(String maxLengthField, String minLengthField, String maxValue, String minValue) {
         this.maxLengthField = maxLengthField;

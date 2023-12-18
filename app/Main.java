@@ -1,15 +1,11 @@
 package app;
 import app.model.User;
-import validation.Validation;
 import validation.Validations;
-import validation.ValidationResult.ValidationResult;
-import validation.impl.IsNotEmptyValidation;
-import validation.impl.IsPhoneNumberValidation;
 public class Main {
     public static void main(String[] args) {
         
         // User user = new User("", "");
-        User user = new User("wwwwwwww", "bhbjbk", "", "");
+        User user = new User("t a", "1231231231", "chauhoangtan@gmail.com");
 
         Validations validations = Validations.getInstance();
         validations.validates(user);
