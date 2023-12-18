@@ -28,6 +28,7 @@ public class Validations {
     public void validates(Object object) {
         Class<?> classObject = object.getClass();
         Field[] fields = classObject.getDeclaredFields();
+        errorList.clearAll();
 
         for (Field field : fields) {
             field.setAccessible(true);

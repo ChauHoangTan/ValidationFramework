@@ -25,4 +25,8 @@ public class SubjectComposite implements IComponent{
     public void add(IComponent errorResult){
         listInvalid.add(errorResult);
     }
+
+    public void clearAll(){
+        listInvalid.clear();
+    }
 }
