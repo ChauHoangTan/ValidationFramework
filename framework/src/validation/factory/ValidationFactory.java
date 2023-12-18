@@ -21,6 +21,12 @@ public class ValidationFactory{
                 case ValidationType.isPhoneNumber:
                     validation = new IsPhoneNumberValidation(childValidation);
                     break;
+                case ValidationType.isEmailAddress:
+                    validation = new IsEmailAddressValidation(childValidation);
+                    break;
+                case ValidationType.isNoWhitespace:
+                    validation = new IsNoWhitespaceValidation(childValidation);
+                    break;
                 case ValidationType.isMaxLength:
                     validation = new IsMaxLengthValidation(childValidation);
                     break;
