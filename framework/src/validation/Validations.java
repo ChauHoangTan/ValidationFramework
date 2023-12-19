@@ -29,7 +29,7 @@ public class Validations {
         return instance;
     }
 
-    public List<ErrorInfo> validates(Object object) {
+    public void validates(Object object) {
         Class<?> classObject = object.getClass();
         Field[] fields = classObject.getDeclaredFields();
         // errorList.clear();
@@ -63,7 +63,8 @@ public class Validations {
 
         // test composite
         // errorList.execute();
-        return errorList;
+        return;
+        // return errorList;
     }
 
     // Convert String from interface validation.annotation.IsNotEmpty into

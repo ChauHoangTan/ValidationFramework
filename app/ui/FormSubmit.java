@@ -41,7 +41,7 @@ public class FormSubmit extends JFrame implements Observer {
     private int step = 65;
 
     private IStrategyNotication notication;
-    private List<ErrorInfo> errorList;
+    private List<ErrorInfo> errorList; // delete
 
     public FormSubmit() {
         errorList = new ArrayList<>();
@@ -75,10 +75,9 @@ public class FormSubmit extends JFrame implements Observer {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                register();
-                // showMessage();
-                // resetMessage();
-                update(errorList);
+                register();   //tranfer data to validations
+                
+                update(errorList);   //strategy 
             }
         });
 
@@ -167,35 +166,58 @@ public class FormSubmit extends JFrame implements Observer {
         String phoneNumber = phoneNumberField.getText();
 
         User user = new User(username, password, age, email, phoneNumber);
-        Validations validations = Validations.getInstance();
+        Validations validations = Validations.getInstance();  //tranfer
 
-        errorList = validations.validates(user);
-        System.out.println(errorList);
+        // errorList = validations.validates(user);
+        // System.out.println(errorList);
     }
 
-    private void showMessage() {
-        if (errorList.size() == 0)
-            return;
+    // private void showMessage() {
+    //     if (errorList.size() == 0)
+    //         return;
 
-    }
+    //     usernameMessage.setText(getMessageFromList("userName"));
+    //     usernameMessage.setVisible(true);
 
-    private void resetMessage() {
-        usernameMessage.setText("");
-        usernameMessage.setVisible(false);
+    //     passwordMessage.setText(getMessageFromList("password"));
+    //     passwordMessage.setVisible(true);
 
-        passwordMessage.setText("");
-        passwordMessage.setVisible(false);
+    //     ageMessage.setText(getMessageFromList("age"));
+    //     ageMessage.setVisible(true);
 
-        ageMessage.setText("");
-        ageMessage.setVisible(false);
+    //     emailMessage.setText(getMessageFromList("phoneNumber"));
+    //     emailMessage.setVisible(true);
 
-        emailMessage.setText("");
-        emailMessage.setVisible(false);
+    //     phoneNumberMessage.setText(getMessageFromList("emailAddress"));
+    //     phoneNumberMessage.setVisible(true);
+    // }
 
-        phoneNumberMessage.setText("");
-        phoneNumberMessage.setVisible(false);
-    }
+    // private void resetMessage() {
+    //     usernameMessage.setText("");
+    //     usernameMessage.setVisible(false);
 
+    //     passwordMessage.setText("");
+    //     passwordMessage.setVisible(false);
+
+    //     ageMessage.setText("");
+    //     ageMessage.setVisible(false);
+
+    //     emailMessage.setText("");
+    //     emailMessage.setVisible(false);
+
+    //     phoneNumberMessage.setText("");
+    //     phoneNumberMessage.setVisible(false);
+    // }
+
+
+    // // temp function [need to instead]
+    // private String getMessageFromList(String key){
+    //     for (ErrorInfo e : errorList){
+    //         Map<String, String> temp = e.getValue();
+    //         return temp.get(key);
+    //     }
+    //     return "";
+    // }
 
     public void setStrategy(IStrategyNotication newStrategy) {
         notication = newStrategy;
@@ -210,3 +232,4 @@ public class FormSubmit extends JFrame implements Observer {
         return;
     }
 }
+
