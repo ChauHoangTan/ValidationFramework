@@ -169,7 +169,6 @@ public class FormSubmit extends JFrame implements Observer {
         Validations validations = Validations.getInstance();  //tranfer
         validations.validates(user);
 
-        System.err.println(username);
         // errorList = validations.validates(user);
         // System.out.println(errorList);
     }
@@ -185,10 +184,10 @@ public class FormSubmit extends JFrame implements Observer {
         ageMessage.setText(errorList.get("age"));
         ageMessage.setVisible(true);
 
-        emailMessage.setText(errorList.get("phoneNumber"));
+        emailMessage.setText(errorList.get("emailAddress"));
         emailMessage.setVisible(true);
 
-        phoneNumberMessage.setText(errorList.get("emailAddress"));
+        phoneNumberMessage.setText(errorList.get("phoneNumber"));
         phoneNumberMessage.setVisible(true);
     }
 
