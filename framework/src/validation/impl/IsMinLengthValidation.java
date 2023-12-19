@@ -34,7 +34,7 @@ public class IsMinLengthValidation extends Validation {
     protected Boolean isValid(String value, Field field) {
         if (field == null)
             return isValid(value);
-        if(value.trim().length() > field.getAnnotation(IsMinLength.class).value()){
+        if(value.trim().length() < field.getAnnotation(IsMinLength.class).value()){
             return false;
         }
         return true;
