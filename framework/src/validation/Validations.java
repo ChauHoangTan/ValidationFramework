@@ -1,6 +1,8 @@
 package validation;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import validation.ValidationResult.ValidationResult;
 import validation.compositeErrorResult.*;
@@ -12,10 +14,11 @@ public class Validations {
 
     private static Validations instance = null;
 
-    private SubjectComposite errorList;
+    // private IComponent errorList;
+    
 
     private Validations() {
-        errorList = new SubjectComposite();
+        // errorList = new SubjectComposite();
     }
 
     public static Validations getInstance() {
@@ -25,10 +28,14 @@ public class Validations {
         return instance;
     }
 
-    public void validates(Object object) {
+    public List<ErrorInfo> validates(Object object) {
         Class<?> classObject = object.getClass();
         Field[] fields = classObject.getDeclaredFields();
-        errorList.clearAll();
+        // errorList.clear();
+
+
+        List<ErrorInfo> errorList = new ArrayList<>();
+
 
         for (Field field : fields) {
             field.setAccessible(true);
@@ -54,7 +61,8 @@ public class Validations {
         }
 
         // test composite
-        errorList.execute();
+        // errorList.execute();
+        return errorList;
     }
 
     // Convert String from interface validation.annotation.IsNotEmpty into

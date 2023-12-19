@@ -1,37 +1,39 @@
-package validation.compositeErrorResult;
+// package validation.compositeErrorResult;
 
-import java.util.ArrayList;
-import java.util.List;
+// import java.util.ArrayList;
+// import java.util.List;
 
-import validation.observerNotification.SubjectNotification;
+// import validation.observerNotification.SubjectNotification;
 
-public class SubjectComposite implements IComponent{
-    private List<IComponent> listInvalid;
+// public class SubjectComposite implements IComponent{
+//     private List<ErrorInfo> listInvalid;
     
-    private static IComponent instance = null;
+//     private static IComponent instance = null;
 
-    // private List<Observer> observers;
+//     // private List<Observer> observers;
 
-    public SubjectComposite(){
-        listInvalid = new ArrayList<>();
-    }
+//     public SubjectComposite(){
+//         listInvalid = new ArrayList<>();
+//     }
 
-    @Override
-    public void execute(){
-        if (listInvalid == null)
-            return;
-        for(IComponent e : listInvalid)
-            e.execute();
-        
-        SubjectNotification notification = SubjectNotification.getInstance();
-        notification.notifyToObserver(listInvalid);
-    }
+//     @Override
+//     public void execute(){
+//         if (listInvalid == null)
+//             return;
+//         for(ErrorInfo e : listInvalid)
+//             e.execute();
+//         // listInvalid.execute();
 
-    public void add(IComponent errorResult){
-        listInvalid.add(errorResult);
-    }
+//         // error implement [need fix]
+//         // SubjectNotification notification = SubjectNotification.getInstance();
+//         // notification.notifyToObserver(listInvalid); 
+//     }
 
-    public void clearAll(){
-        listInvalid.clear();
-    }
-}
+//     public void add(ErrorInfo errorResult){
+//         listInvalid.add(errorResult);
+//     }
+
+//     public void clearAll(){
+//         listInvalid.clear();
+//     }
+// }
