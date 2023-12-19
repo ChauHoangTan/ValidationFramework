@@ -15,7 +15,6 @@ public class User {
     // @IsRegex ( regex = "")
     private String password;
 
-    @IsNotEmpty
     @IsPhoneNumber
     private String phoneNumber;
 

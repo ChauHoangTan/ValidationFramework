@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,10 +42,10 @@ public class FormSubmit extends JFrame implements Observer {
     private int step = 65;
 
     private IStrategyNotication notication;
-    private List<ErrorInfo> errorList; // delete
+    // private List<ErrorInfo> errorList; // delete
 
     public FormSubmit() {
-        errorList = new ArrayList<>();
+        // errorList = new ArrayList<>();
         setStrategy(new DialogStrategy());
         initComponents();
     }
@@ -76,8 +77,7 @@ public class FormSubmit extends JFrame implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 register();   //tranfer data to validations
-                
-                update(errorList);   //strategy 
+                // update(errorList);   //strategy 
             }
         });
 
@@ -165,52 +165,52 @@ public class FormSubmit extends JFrame implements Observer {
         String email = emailField.getText();
         String phoneNumber = phoneNumberField.getText();
 
-        User user = new User(username, password, age, email, phoneNumber);
+        User user = new User(username, password, age, phoneNumber, email);
         Validations validations = Validations.getInstance();  //tranfer
+        validations.validates(user);
 
+        System.err.println(username);
         // errorList = validations.validates(user);
         // System.out.println(errorList);
     }
 
-    // private void showMessage() {
-    //     if (errorList.size() == 0)
-    //         return;
+    private void showMessage(HashMap<String, String> errorList) {
 
-    //     usernameMessage.setText(getMessageFromList("userName"));
-    //     usernameMessage.setVisible(true);
+        usernameMessage.setText(errorList.get("userName"));
+        usernameMessage.setVisible(true);
 
-    //     passwordMessage.setText(getMessageFromList("password"));
-    //     passwordMessage.setVisible(true);
+        passwordMessage.setText(errorList.get("password"));
+        passwordMessage.setVisible(true);
 
-    //     ageMessage.setText(getMessageFromList("age"));
-    //     ageMessage.setVisible(true);
+        ageMessage.setText(errorList.get("age"));
+        ageMessage.setVisible(true);
 
-    //     emailMessage.setText(getMessageFromList("phoneNumber"));
-    //     emailMessage.setVisible(true);
+        emailMessage.setText(errorList.get("phoneNumber"));
+        emailMessage.setVisible(true);
 
-    //     phoneNumberMessage.setText(getMessageFromList("emailAddress"));
-    //     phoneNumberMessage.setVisible(true);
-    // }
+        phoneNumberMessage.setText(errorList.get("emailAddress"));
+        phoneNumberMessage.setVisible(true);
+    }
 
-    // private void resetMessage() {
-    //     usernameMessage.setText("");
-    //     usernameMessage.setVisible(false);
+    private void resetMessage() {
+        usernameMessage.setText("");
+        usernameMessage.setVisible(false);
 
-    //     passwordMessage.setText("");
-    //     passwordMessage.setVisible(false);
+        passwordMessage.setText("");
+        passwordMessage.setVisible(false);
 
-    //     ageMessage.setText("");
-    //     ageMessage.setVisible(false);
+        ageMessage.setText("");
+        ageMessage.setVisible(false);
 
-    //     emailMessage.setText("");
-    //     emailMessage.setVisible(false);
+        emailMessage.setText("");
+        emailMessage.setVisible(false);
 
-    //     phoneNumberMessage.setText("");
-    //     phoneNumberMessage.setVisible(false);
-    // }
+        phoneNumberMessage.setText("");
+        phoneNumberMessage.setVisible(false);
+    }
 
 
-    // // temp function [need to instead]
+    // temp function [need to instead]
     // private String getMessageFromList(String key){
     //     for (ErrorInfo e : errorList){
     //         Map<String, String> temp = e.getValue();
@@ -224,11 +224,14 @@ public class FormSubmit extends JFrame implements Observer {
     }
 
     @Override
-    public void update(List<ErrorInfo> listError) {
-        if (listError.size() == 0)
+    public void update(HashMap<String, String> errorList) {
+        resetMessage();
+        if (errorList.size() == 0)
             notication.display("Register success");
-        else
+        else{
+            showMessage(errorList);
             notication.display("Register fail");
+        }
         return;
     }
 }

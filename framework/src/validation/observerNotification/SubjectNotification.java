@@ -1,8 +1,8 @@
 package validation.observerNotification;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import validation.compositeErrorResult.ErrorInfo;
 
 public class SubjectNotification {
 
@@ -21,20 +21,26 @@ public class SubjectNotification {
         return instance;
     }
 
-    public void notifyToObserver(List<ErrorInfo> list) {
+    public void notifyToObserver(HashMap<String,String> errrorList) {
         if (observers != null) {
             for (Observer observer : observers) {
-                observer.update(list);
+                observer.update(errrorList);
             }
         }
 
     }
 
     public void attach(Observer observer) {
+        if(observers == null){
+            this.observers = new ArrayList<>();
+        }
         this.observers.add(observer);
     }
 
     public void detach(Observer observer) {
-        this.observers.remove(observer);
+        if(observers != null){
+            this.observers.remove(observer);
+        }
+        
     }
 }

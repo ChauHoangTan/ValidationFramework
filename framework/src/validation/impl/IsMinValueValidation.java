@@ -38,7 +38,7 @@ public class IsMinValueValidation extends Validation {
     protected Boolean isValid(String value, Field field) {
         if (field == null)
             return isValid(value);
-        System.out.println("da den day  --  " + Double.valueOf(value) + " >> " + field.getAnnotation(IsMinValue.class).value() + "   ??  " +  (Double.valueOf(value) < field.getAnnotation(IsMinValue.class).value()));
+        
         try {
             if (Double.valueOf(value) < field.getAnnotation(IsMinValue.class).value()) {
                 return false;
