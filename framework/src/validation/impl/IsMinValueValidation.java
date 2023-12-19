@@ -7,11 +7,11 @@ import validation.annotation.IsMinValue;
 
 public class IsMinValueValidation extends Validation {
 
-    public IsMinValueValidation(){
+    public IsMinValueValidation() {
 
     }
 
-    public IsMinValueValidation(Validation validation){
+    public IsMinValueValidation(Validation validation) {
         this.childValidation = validation;
     }
 
@@ -22,7 +22,7 @@ public class IsMinValueValidation extends Validation {
     }
 
     // self decorator
-    
+
     private Boolean isValid(String value) {
         try {
             if (Double.valueOf(value) < Double.MIN_VALUE)
@@ -39,14 +39,13 @@ public class IsMinValueValidation extends Validation {
         if (field == null)
             return isValid(value);
         try {
-            if (Double.valueOf(value) > field.getAnnotation(IsMinValue.class).value())
+            if (Double.valueOf(value) < field.getAnnotation(IsMinValue.class).value()) {
                 return false;
-            else
+            } else
                 return true;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    
 }
