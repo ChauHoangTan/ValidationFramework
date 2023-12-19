@@ -17,7 +17,4 @@ public class ConcreteValidation {
         return reason;
     }
 
-    protected boolean isValid(){
-        return validattion.isValid(value);
-    }
 }

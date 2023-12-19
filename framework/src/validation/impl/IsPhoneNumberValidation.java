@@ -23,8 +23,8 @@ public class IsPhoneNumberValidation extends Validation{
 
     }
 
-    @Override
-    protected Boolean isValid(String value) {
+    
+    private Boolean isValid(String value) {
         return value.length() == 10 && value.matches("[0-9]+");
     }
     

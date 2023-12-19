@@ -21,8 +21,8 @@ public class IsEmailAddressValidation extends Validation{
         return isEmailAddress.message();
     }
 
-    @Override
-    protected Boolean isValid(String value) {
+    
+    private Boolean isValid(String value) {
         return Pattern.compile(EMAIL_REGEX).matcher(value).matches();
     }
 

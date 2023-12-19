@@ -48,7 +48,5 @@ public abstract class Validation {
 
     protected abstract String getReason(Field field);
 
-    protected abstract Boolean isValid(String value); // need field in some case
-
     protected abstract Boolean isValid(String value, Field field);
 }

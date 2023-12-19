@@ -17,8 +17,8 @@ public class IsNoWhitespaceValidation extends Validation {
         return isNoWhitespace.message();
     }
 
-    @Override
-    protected Boolean isValid(String value) {
+    
+    private Boolean isValid(String value) {
         if(!value.contains(" ")){
             return true;
         }

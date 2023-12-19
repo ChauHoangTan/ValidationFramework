@@ -22,8 +22,8 @@ public class IsMinValueValidation extends Validation {
     }
 
     // self decorator
-    @Override
-    protected Boolean isValid(String value) {
+    
+    private Boolean isValid(String value) {
         try {
             if (Double.valueOf(value) < Double.MIN_VALUE)
                 return false;

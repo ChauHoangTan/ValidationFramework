@@ -5,6 +5,7 @@ import java.util.Map;
 
 import validation.Validation;
 import validation.ValidationType;
+import validation.annotation.IsNumber;
 import validation.impl.*;
 
 public class ValidationFactory{
@@ -38,6 +39,12 @@ public class ValidationFactory{
                     break;
                 case ValidationType.isMinValue:
                     validation = new IsMinValueValidation(childValidation);
+                    break;
+                case ValidationType.IsRegex:
+                    validation = new IsRegexValidation(childValidation);
+                    break;
+                case ValidationType.IsNumber:
+                    validation = new IsNumberValidation(childValidation);
                     break;
                 default:
                     break;

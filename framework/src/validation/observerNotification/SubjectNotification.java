@@ -22,9 +22,12 @@ public class SubjectNotification {
     }
 
     public void notifyToObserver(List<IComponent> list){
-        for (Observer observer : observers) {
-            observer.update(list);
+        if(observers != null){
+            for (Observer observer : observers) {
+                observer.update(list);
         }
+        }
+        
     }
 
 

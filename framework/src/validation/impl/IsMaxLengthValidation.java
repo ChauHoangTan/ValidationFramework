@@ -22,8 +22,8 @@ public class IsMaxLengthValidation extends Validation {
     }
 
     // self decorator
-    @Override
-    protected Boolean isValid(String value) {
+    
+    private Boolean isValid(String value) {
         if(value.trim().length() > 255){
             return false;
         }
