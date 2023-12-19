@@ -1,10 +1,15 @@
 package validation;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import validation.ValidationResult.ValidationResult;
 import validation.compositeErrorResult.*;
 import validation.factory.ValidationFactory;
+import validation.observerNotification.SubjectNotification;
 
 import java.lang.annotation.Annotation;
 
@@ -12,10 +17,11 @@ public class Validations {
 
     private static Validations instance = null;
 
-    private SubjectComposite errorList;
+    // private IComponent errorList;
+    
 
     private Validations() {
-        errorList = new SubjectComposite();
+        // errorList = new SubjectComposite();
     }
 
     public static Validations getInstance() {
@@ -28,7 +34,11 @@ public class Validations {
     public void validates(Object object) {
         Class<?> classObject = object.getClass();
         Field[] fields = classObject.getDeclaredFields();
-        errorList.clearAll();
+        // errorList.clear();
+
+
+        HashMap<String, String> errorList = new HashMap<String, String>();
+
 
         for (Field field : fields) {
             field.setAccessible(true);
@@ -43,9 +53,11 @@ public class Validations {
                 Object valObject = field.get(object);
                 ValidationResult result = validation.validate(valObject.toString(), field);
                 if (result.isValid()) {
-                    System.out.println(field.getName() + " " + "Valid");
+                    // System.out.println(field.getName() + " " + "Valid");
                 } else {
-                    errorList.add(new ErrorInfo(field.getName(), result.getReason()));
+                    errorList.put(field.getName(), result.getReason());   
+                    // System.out.println(field.getName() + " " + "Invalid");
+                    System.out.println(result.getReason());
                 }
             } catch (Exception e) {
                 // TODO: handle exception
@@ -54,7 +66,12 @@ public class Validations {
         }
 
         // test composite
-        errorList.execute();
+        // errorList.execute();
+
+        // call Subject Observer
+        SubjectNotification notification = SubjectNotification.getInstance();
+        notification.notifyToObserver(errorList);
+        // return errorList;
     }
 
     // Convert String from interface validation.annotation.IsNotEmpty into

@@ -1,5 +1,5 @@
-package validation.compositeErrorResult;
+// package validation.compositeErrorResult;
 
-public interface IComponent {
-    void execute();
-} 
+// public interface IComponent {
+//     public abstract void execute();
+// } 

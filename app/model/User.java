@@ -12,10 +12,9 @@ public class User {
 
     @IsNotEmpty ( message = "Password is required!")
     @IsNoWhitespace
-    @IsRegex ( regex = "")
+    // @IsRegex ( regex = "")
     private String password;
 
-    @IsNotEmpty
     @IsPhoneNumber
     private String phoneNumber;
 
@@ -29,21 +28,6 @@ public class User {
     @IsNoWhitespace
     private String emailAddress;
 
-    @IsNotEmpty
-    @IsMaxLength
-    private String maxLengthField;
-
-    @IsNotEmpty
-    @IsMinLength
-    private String minLengthField;
-
-    @IsNotEmpty
-    @IsMaxValue
-    private String maxValueField;
-
-    @IsNotEmpty
-    @IsMinValue (value = 0)
-    private String minValueField;
 
     public User(String userName, String password, String age, String phoneNumber, String emailAddress) {
         this.userName = userName;
@@ -53,11 +37,4 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-
-    public User(String maxLengthField, String minLengthField, String maxValue, String minValue) {
-        this.maxLengthField = maxLengthField;
-        this.minLengthField = minLengthField;
-        this.maxValueField = maxValue;
-        this.minValueField = minValue;
-    }
 }
