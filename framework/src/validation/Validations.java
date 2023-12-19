@@ -2,6 +2,7 @@ package validation;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import validation.ValidationResult.ValidationResult;
@@ -52,7 +53,7 @@ public class Validations {
                 if (result.isValid()) {
                     System.out.println(field.getName() + " " + "Valid");
                 } else {
-                    errorList.add(new ErrorInfo(field.getName(), result.getReason()));
+                    errorList.add(new ErrorInfo(field.getName(), result.getReason()));   
                 }
             } catch (Exception e) {
                 // TODO: handle exception

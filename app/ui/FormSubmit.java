@@ -36,6 +36,7 @@ public class FormSubmit extends JFrame implements Observer {
 
     private int rightx = 250;
     private int righty = 160;
+    private int righty2 = 195;
 
     private int step = 65;
 
@@ -117,6 +118,12 @@ public class FormSubmit extends JFrame implements Observer {
         add(emailField);
         add(phoneNumberField);
 
+        add(usernameMessage);
+        add(passwordMessage);
+        add(ageMessage);
+        add(emailMessage);
+        add(phoneNumberMessage);
+
         add(registerButton);
 
         headerLabel.setBounds(220, 70, 600, 60);
@@ -132,9 +139,17 @@ public class FormSubmit extends JFrame implements Observer {
         emailField.setBounds(rightx, righty += step, 320, 35);
         phoneNumberField.setBounds(rightx, righty += step, 320, 35);
 
+        usernameMessage.setBounds(rightx, righty2, 320, 35);
+        passwordMessage.setBounds(rightx, righty2 += step, 320, 35);
+        ageMessage.setBounds(rightx, righty2 += step, 60, 35);
+        emailMessage.setBounds(rightx, righty2 += step, 320, 35);
+        phoneNumberMessage.setBounds(rightx, righty2 += step, 320, 35);
+
         registerButton.setBackground(Color.orange);
         registerButton.setOpaque(true);
         registerButton.setBounds(280, 520, 180, 35);
+
+    
 
         setTitle("Register form");
         setSize(720, 720);
@@ -162,25 +177,6 @@ public class FormSubmit extends JFrame implements Observer {
         if (errorList.size() == 0)
             return;
 
-        List<Map<String, String>> temp = new ArrayList<>();
-
-        for (ErrorInfo e : errorList)
-            temp.add(e.getValue());
-
-        usernameMessage.setText("");
-        usernameMessage.setVisible(false);
-
-        passwordMessage.setText("");
-        passwordMessage.setVisible(false);
-
-        ageMessage.setText("");
-        ageMessage.setVisible(false);
-
-        emailMessage.setText("");
-        emailMessage.setVisible(false);
-
-        phoneNumberMessage.setText("");
-        phoneNumberMessage.setVisible(false);
     }
 
     private void resetMessage() {
@@ -199,6 +195,7 @@ public class FormSubmit extends JFrame implements Observer {
         phoneNumberMessage.setText("");
         phoneNumberMessage.setVisible(false);
     }
+
 
     public void setStrategy(IStrategyNotication newStrategy) {
         notication = newStrategy;

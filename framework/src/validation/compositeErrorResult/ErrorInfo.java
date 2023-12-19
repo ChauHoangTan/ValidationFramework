@@ -25,7 +25,6 @@ public class ErrorInfo {
     public Map<String, String> getValue(){
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put(fieldName, reason);
-        System.out.println("day" + valuesMap);
         return valuesMap;
     }
 
