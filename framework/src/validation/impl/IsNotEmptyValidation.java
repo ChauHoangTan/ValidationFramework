@@ -3,7 +3,6 @@ package validation.impl;
 import java.lang.reflect.Field;
 
 import validation.Validation;
-import validation.annotation.IsNotEmpty;
 
 public class IsNotEmptyValidation extends Validation {
 

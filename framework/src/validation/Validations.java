@@ -1,13 +1,9 @@
 package validation;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import validation.ValidationResult.ValidationResult;
-import validation.compositeErrorResult.*;
 import validation.factory.ValidationFactory;
 import validation.observerNotification.SubjectNotification;
 
@@ -58,8 +54,8 @@ public class Validations {
                     // System.out.println(field.getName() + " " + "Valid");
                 } else {
                     errorList.put(field.getName(), result.getReason());   
-                    System.out.println(field.getName() + " " + "Invalid");
-                    System.out.println(result.getReason());
+                    // System.out.println(field.getName() + " " + "Invalid");
+                    // System.out.println(result.getReason());
                 }
             } catch (Exception e) {
                 // TODO: handle exception

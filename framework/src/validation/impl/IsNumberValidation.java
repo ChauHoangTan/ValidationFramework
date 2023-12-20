@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 
 import validation.Validation;
-import validation.annotation.IsNumber;
 
 public class IsNumberValidation extends Validation {
 
