@@ -3,6 +3,7 @@ package validation;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.function.Predicate;
 
 import validation.ValidationResult.ValidationResult;
 import validation.customeValidate.CustomeValidate;
@@ -53,79 +54,64 @@ public abstract class Validation {
             //     System.out.println(true);
             // }
             // System.err.println(TrimCustomeValidatorType(cValidate.getClass().toString()));
+            
+            Boolean methodCheckValid = 
+                TrimCustomeValidatorType(cValidate.getClass().toString()).equals("DefaultValidate") ?
+                isValid(value, field) : cValidate.validate(value);
+
             String fieldName = field.getName();
             if (childValidation != null) {
                 ValidationResult childValidationResult = childValidation.validate(value, field);
 
                 if (childValidationResult.isValid()) {
-                    if(!TrimCustomeValidatorType(cValidate.getClass().toString()).equals("DefaultValidate")){
-                        // System.err.println(cValidate.validate(value));
-                        // System.err.println(true);
-                        if( cValidate.validate(value)){
-                            return ValidationResult.valid();
-                        }else{
-                            return ValidationResult.inValid(fieldName, getReason());
-                        }
-                    }else{
-                        // System.err.println(false);
-                        if (isValid(value, field)) {
-                            return ValidationResult.valid();
-                        } else {
-                            return ValidationResult.inValid(fieldName, getReason());
-                        }
-                    }
-                    
-                } else {
-                    if(!TrimCustomeValidatorType(cValidate.getClass().toString()).equals("DefaultValidate")){
-                        // System.err.println(cValidate.validate(value));
-                        // System.err.println(true);
-                        if (cValidate.validate(value)) {
-                            return ValidationResult.inValid(fieldName, childValidationResult.getReason());
-                        } else {
-                            return ValidationResult.inValid(fieldName,
-                                    getReason() + "\n" + childValidationResult.getReason());
-                        }
-                    }else{
-                        // System.err.println(false);
-                        if (isValid(value, field)) {
-                            return ValidationResult.inValid(fieldName, childValidationResult.getReason());
-                        } else {
-                            return ValidationResult.inValid(fieldName,
-                                    getReason() + "\n" + childValidationResult.getReason());
-                        }
-                    }
-                    
-                }
-            } else {
-                
-                // if (isValid(value, field)) {
-                //     return ValidationResult.valid();
-                // } else {
-                //     return ValidationResult.inValid(fieldName, getReason());
-                // }
-
-                if(!TrimCustomeValidatorType(cValidate.getClass().toString()).equals("DefaultValidate")){
-                    // System.err.println(cValidate.validate(value));
-                    // System.err.println(true);
-                    if (cValidate.validate(value)) {
+                    if (methodCheckValid) {
                         return ValidationResult.valid();
                     } else {
                         return ValidationResult.inValid(fieldName, getReason());
                     }
-                }else{
-                    // System.err.println(false);
+                } else {
+                    if (methodCheckValid) {
+                        return ValidationResult.inValid(fieldName, childValidationResult.getReason());
+                    } else {
+                        return ValidationResult.inValid(fieldName,
+                                getReason() + "\n" + childValidationResult.getReason());
+                    }
+                }
+            } else {
+                
+                if (methodCheckValid) {
+                    return ValidationResult.valid();
+                } else {
+                    return ValidationResult.inValid(fieldName, getReason());
+                }
+            }
+        } catch (Exception e) {
+            String fieldName = field.getName();
+            if (childValidation != null) {
+                ValidationResult childValidationResult = childValidation.validate(value, field);
+
+                if (childValidationResult.isValid()) {
                     if (isValid(value, field)) {
                         return ValidationResult.valid();
                     } else {
                         return ValidationResult.inValid(fieldName, getReason());
                     }
+                } else {
+                    if (isValid(value, field)) {
+                        return ValidationResult.inValid(fieldName, childValidationResult.getReason());
+                    } else {
+                        return ValidationResult.inValid(fieldName,
+                                getReason() + "\n" + childValidationResult.getReason());
+                    }
+                }
+            } else {
+                if (isValid(value, field)) {
+                    return ValidationResult.valid();
+                } else {
+                    return ValidationResult.inValid(fieldName, getReason());
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
-        return ValidationResult.valid();
 
         // String fieldName = field.getName();
         // if (childValidation != null) {
