@@ -7,19 +7,6 @@ import validation.annotation.IsMinLength;
 
 public class IsMinLengthValidation extends Validation {
 
-    public IsMinLengthValidation(){
-
-    }
-
-    public IsMinLengthValidation(Validation validation){
-        this.childValidation = validation;
-    }
-
-    @Override
-    protected String getReason(Field field) {
-        IsMinLength annotation = field.getAnnotation(IsMinLength.class);
-        return annotation.message();
-    }
 
     // self decorator
     

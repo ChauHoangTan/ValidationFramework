@@ -46,7 +46,9 @@ public class Validations {
             Validation validation = null;
             for (Annotation annotation : annotations) {
                 Validation newValidation = ValidationFactory
-                        .createValidation(TrimValidationType(annotation.annotationType().toString()), validation);
+                        .createValidation(TrimValidationType(annotation.annotationType().toString()));
+                newValidation.setChildValdation(validation);
+                newValidation.setAnnotation(annotation);
                 validation = newValidation;
             }
             try {
@@ -56,7 +58,7 @@ public class Validations {
                     // System.out.println(field.getName() + " " + "Valid");
                 } else {
                     errorList.put(field.getName(), result.getReason());   
-                    // System.out.println(field.getName() + " " + "Invalid");
+                    System.out.println(field.getName() + " " + "Invalid");
                     System.out.println(result.getReason());
                 }
             } catch (Exception e) {

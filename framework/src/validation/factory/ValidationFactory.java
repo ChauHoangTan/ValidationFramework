@@ -11,40 +11,40 @@ import validation.impl.*;
 public class ValidationFactory{
     private static Map<String, Validation> validationList = new HashMap<String, Validation>();
 
-    public static Validation createValidation(String typeValidation, Validation childValidation){
+    public static Validation createValidation(String typeValidation){
         Validation validation = validationList.get(typeValidation);
 
         if(validation == null){
             switch (typeValidation) {
                 case ValidationType.isNotEmpty:
-                    validation = new IsNotEmptyValidation(childValidation);
+                    validation = new IsNotEmptyValidation();
                     break;
                 case ValidationType.isPhoneNumber:
-                    validation = new IsPhoneNumberValidation(childValidation);
+                    validation = new IsPhoneNumberValidation();
                     break;
                 case ValidationType.isEmailAddress:
-                    validation = new IsEmailAddressValidation(childValidation);
+                    validation = new IsEmailAddressValidation();
                     break;
                 case ValidationType.isNoWhitespace:
-                    validation = new IsNoWhitespaceValidation(childValidation);
+                    validation = new IsNoWhitespaceValidation();
                     break;
                 case ValidationType.isMaxLength:
-                    validation = new IsMaxLengthValidation(childValidation);
+                    validation = new IsMaxLengthValidation();
                     break;
                 case ValidationType.isMinLength:
-                    validation = new IsMinLengthValidation(childValidation);
+                    validation = new IsMinLengthValidation();
                     break;
                 case ValidationType.isMaxValue:
-                    validation = new IsMaxValueValidation(childValidation);
+                    validation = new IsMaxValueValidation();
                     break;
                 case ValidationType.isMinValue:
-                    validation = new IsMinValueValidation(childValidation);
+                    validation = new IsMinValueValidation();
                     break;
                 case ValidationType.IsRegex:
-                    validation = new IsRegexValidation(childValidation);
+                    validation = new IsRegexValidation();
                     break;
                 case ValidationType.IsNumber:
-                    validation = new IsNumberValidation(childValidation);
+                    validation = new IsNumberValidation();
                     break;
                 default:
                     break;

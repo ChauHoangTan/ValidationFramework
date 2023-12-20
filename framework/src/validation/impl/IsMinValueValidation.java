@@ -7,19 +7,6 @@ import validation.annotation.IsMinValue;
 
 public class IsMinValueValidation extends Validation {
 
-    public IsMinValueValidation() {
-
-    }
-
-    public IsMinValueValidation(Validation validation) {
-        this.childValidation = validation;
-    }
-
-    @Override
-    protected String getReason(Field field) {
-        IsMinValue annotation = field.getAnnotation(IsMinValue.class);
-        return annotation.message();
-    }
 
     // self decorator
 

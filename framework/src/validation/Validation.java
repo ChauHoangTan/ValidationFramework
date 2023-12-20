@@ -1,12 +1,15 @@
 package validation;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import validation.ValidationResult.ValidationResult;
 
 public abstract class Validation {
 
     protected Validation childValidation = null;
+    protected Annotation annotation = null;
 
     public Validation() {
 
@@ -14,6 +17,24 @@ public abstract class Validation {
 
     public Validation(Validation validation) {
 
+    }
+
+    public void setChildValdation(Validation validation){
+        this.childValidation = validation;
+    }
+
+    public void setAnnotation(Annotation annotation){
+        this.annotation = annotation;
+        
+
+        // try {
+        //     // Sử dụng reflection để lấy giá trị của thuộc tính message
+        //     Method method = annotation.annotationType().getMethod("message");
+        //     String message = (String)method.invoke(annotation);
+        //     System.err.println();
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
     }
 
     // self decorator
@@ -27,28 +48,38 @@ public abstract class Validation {
                 if (isValid(value, field)) {
                     return ValidationResult.valid();
                 } else {
-                    return ValidationResult.inValid(fieldName, getReason(field));
+                    return ValidationResult.inValid(fieldName, getReason());
                 }
             } else {
                 if (isValid(value, field)) {
                     return ValidationResult.inValid(fieldName, chikValidationResult.getReason());
                 } else {
                     return ValidationResult.inValid(fieldName,
-                            getReason(field) + "\n" + chikValidationResult.getReason());
+                            getReason() + "\n" + chikValidationResult.getReason());
                 }
             }
         } else {
             if (isValid(value, field)) {
                 return ValidationResult.valid();
             } else {
-                return ValidationResult.inValid(fieldName, getReason(field));
+                return ValidationResult.inValid(fieldName, getReason());
             }
         }
 
     }
     // protected abstract String getField();
 
-    protected abstract String getReason(Field field);
+    protected String getReason(){
+        try {
+            // Sử dụng reflection để lấy giá trị của thuộc tính message
+            Method method = annotation.annotationType().getMethod("message");
+            String message = (String)method.invoke(annotation);
+            return message;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
     protected abstract Boolean isValid(String value, Field field);
 }
