@@ -3,6 +3,7 @@ package validation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class Validations {
         // errorList.clear();
 
 
-        HashMap<String, String> errorList = new HashMap<String, String>();
+        HashMap<String, String> errorList = new LinkedHashMap<String, String>();
 
 
         for (Field field : fields) {
@@ -49,6 +50,7 @@ public class Validations {
                         .createValidation(TrimValidationType(annotation.annotationType().toString()), validation);
                 validation = newValidation;
             }
+            // System.out.println(field.toString() + "   <>   " + annotations + "\n");
             try {
                 Object valObject = field.get(object);
                 ValidationResult result = validation.validate(valObject.toString(), field);
@@ -57,11 +59,14 @@ public class Validations {
                 } else {
                     errorList.put(field.getName(), result.getReason());   
                     // System.out.println(field.getName() + " " + "Invalid");
-                    System.out.println(result.getReason());
+                    // System.out.println(result.getReason());
+                    // System.out.println(errorList);
                 }
             } catch (Exception e) {
                 // TODO: handle exception
             }
+            // System.out.println(errorList);
+            // System.out.println("\n");
 
         }
 

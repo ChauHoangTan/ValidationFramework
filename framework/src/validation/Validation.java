@@ -20,6 +20,7 @@ public abstract class Validation {
     // check if it has child validation, validate child fisrt then validate it
     public final ValidationResult validate(String value, Field field) {
         String fieldName = field.getName();
+        // System.out.println(value + "  ><  "+ fieldName);
         if (childValidation != null) {
             ValidationResult chikValidationResult = childValidation.validate(value, field);
 

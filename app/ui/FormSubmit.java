@@ -16,6 +16,7 @@ import validation.compositeErrorResult.ErrorInfo;
 import validation.Validations;
 import validation.observerNotification.Observer;
 import validation.strategyNotication.DialogStrategy;
+import validation.strategyNotication.OptionPaneStrategy;
 import validation.strategyNotication.IStrategyNotication;
 
 public class FormSubmit extends JFrame implements Observer {
@@ -37,7 +38,7 @@ public class FormSubmit extends JFrame implements Observer {
 
     private int rightx = 250;
     private int righty = 160;
-    private int righty2 = 195;
+    private int righty2 = 190;
 
     private int step = 65;
 
@@ -47,6 +48,7 @@ public class FormSubmit extends JFrame implements Observer {
     public FormSubmit() {
         // errorList = new ArrayList<>();
         setStrategy(new DialogStrategy());
+        // setStrategy(new OptionPaneStrategy());
         initComponents();
     }
 
@@ -76,8 +78,8 @@ public class FormSubmit extends JFrame implements Observer {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                register();   //tranfer data to validations
-                // update(errorList);   //strategy 
+                register(); // tranfer data to validations
+                // update(errorList); //strategy
             }
         });
 
@@ -138,17 +140,15 @@ public class FormSubmit extends JFrame implements Observer {
         emailField.setBounds(rightx, righty += step, 320, 35);
         phoneNumberField.setBounds(rightx, righty += step, 320, 35);
 
-        usernameMessage.setBounds(rightx, righty2, 320, 35);
-        passwordMessage.setBounds(rightx, righty2 += step, 320, 35);
-        ageMessage.setBounds(rightx, righty2 += step, 60, 35);
-        emailMessage.setBounds(rightx, righty2 += step, 320, 35);
-        phoneNumberMessage.setBounds(rightx, righty2 += step, 320, 35);
+        usernameMessage.setBounds(rightx, righty2, 400, 35);
+        passwordMessage.setBounds(rightx, righty2 += step, 400, 35);
+        ageMessage.setBounds(rightx, righty2 += step, 400, 35);
+        emailMessage.setBounds(rightx, righty2 += step, 400, 35);
+        phoneNumberMessage.setBounds(rightx, righty2 += step, 400, 35);
 
         registerButton.setBackground(Color.orange);
         registerButton.setOpaque(true);
         registerButton.setBounds(280, 520, 180, 35);
-
-    
 
         setTitle("Register form");
         setSize(720, 720);
@@ -166,28 +166,40 @@ public class FormSubmit extends JFrame implements Observer {
         String phoneNumber = phoneNumberField.getText();
 
         User user = new User(username, password, age, phoneNumber, email);
-        Validations validations = Validations.getInstance();  //tranfer
+        Validations validations = Validations.getInstance(); // tranfer
         validations.validates(user);
 
         // errorList = validations.validates(user);
         // System.out.println(errorList);
     }
 
+    private String getMessageFromError(HashMap<String, String> list, String key){
+
+        if (list.get(key) == null) 
+            return null;
+        String[] mes = list.get(key).split("\n");
+        if (mes.length > 0 )
+            return list.get(key).split("\n")[list.get(key).split("\n").length - 1];
+        return null;
+
+    }
+
     private void showMessage(HashMap<String, String> errorList) {
 
-        usernameMessage.setText(errorList.get("userName"));
+        usernameMessage.setText(getMessageFromError(errorList, "userName"));
         usernameMessage.setVisible(true);
 
-        passwordMessage.setText(errorList.get("password"));
+        passwordMessage
+                .setText(getMessageFromError(errorList, "password"));
         passwordMessage.setVisible(true);
 
-        ageMessage.setText(errorList.get("age"));
+        ageMessage.setText(getMessageFromError(errorList, "age"));
         ageMessage.setVisible(true);
 
-        emailMessage.setText(errorList.get("emailAddress"));
+        emailMessage.setText(getMessageFromError(errorList, "emailAddress"));
         emailMessage.setVisible(true);
 
-        phoneNumberMessage.setText(errorList.get("phoneNumber"));
+        phoneNumberMessage.setText(getMessageFromError(errorList, "phoneNumber"));
         phoneNumberMessage.setVisible(true);
     }
 
@@ -208,18 +220,20 @@ public class FormSubmit extends JFrame implements Observer {
         phoneNumberMessage.setVisible(false);
     }
 
-
-    // temp function [need to instead]
-    // private String getMessageFromList(String key){
-    //     for (ErrorInfo e : errorList){
-    //         Map<String, String> temp = e.getValue();
-    //         return temp.get(key);
-    //     }
-    //     return "";
-    // }
-
     public void setStrategy(IStrategyNotication newStrategy) {
         notication = newStrategy;
+    }
+
+    private String formatMesaage(HashMap<String, String> list) {
+        String mess = "";
+        for (Map.Entry<String, String> entry : list.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            mess += (" - Field: " + key + ", Error: " + value + "\n");
+        }
+        if (mess == "")
+            return "Register fail";
+        return mess;
     }
 
     @Override
@@ -227,11 +241,10 @@ public class FormSubmit extends JFrame implements Observer {
         resetMessage();
         if (errorList.size() == 0)
             notication.display("Register success");
-        else{
+        else {
             showMessage(errorList);
-            notication.display("Register fail");
+            notication.display(formatMesaage(errorList));
         }
         return;
     }
 }
-
