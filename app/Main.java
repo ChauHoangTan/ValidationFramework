@@ -1,7 +1,5 @@
 package app;
-import app.model.User;
 import app.ui.FormSubmit;
-import validation.Validations;
 import validation.observerNotification.SubjectNotification;
 public class Main {
     public static void main(String[] args) {

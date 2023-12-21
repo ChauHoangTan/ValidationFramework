@@ -7,20 +7,6 @@ import validation.annotation.IsMaxLength;
 
 public class IsMaxLengthValidation extends Validation {
 
-    public IsMaxLengthValidation(){
-
-    }
-
-    public IsMaxLengthValidation(Validation validation){
-        this.childValidation = validation;
-    }
-
-    @Override
-    protected String getReason(Field field) {
-        IsMaxLength annotation = field.getAnnotation(IsMaxLength.class);
-        return annotation.message();
-    }
-
     // self decorator
     
     private Boolean isValid(String value) {

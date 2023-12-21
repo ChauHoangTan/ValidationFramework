@@ -7,20 +7,6 @@ import validation.annotation.IsMaxValue;
 
 public class IsMaxValueValidation extends Validation {
 
-    public IsMaxValueValidation(){
-
-    }
-
-    public IsMaxValueValidation(Validation validation){
-        this.childValidation = validation;
-    }
-
-    @Override
-    protected String getReason(Field field) {
-        IsMaxValue annotation = field.getAnnotation(IsMaxValue.class);
-        return annotation.message();
-    }
-
     // self decorator
     
     private Boolean isValid(String value) {

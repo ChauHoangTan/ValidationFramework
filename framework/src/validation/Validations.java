@@ -1,14 +1,13 @@
 package validation;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import validation.ValidationResult.ValidationResult;
-import validation.compositeErrorResult.*;
 import validation.factory.ValidationFactory;
 import validation.observerNotification.SubjectNotification;
 
@@ -47,7 +46,9 @@ public class Validations {
             Validation validation = null;
             for (Annotation annotation : annotations) {
                 Validation newValidation = ValidationFactory
-                        .createValidation(TrimValidationType(annotation.annotationType().toString()), validation);
+                        .createValidation(TrimValidationType(annotation.annotationType().toString()));
+                newValidation.setChildValdation(validation);
+                newValidation.setAnnotation(annotation);
                 validation = newValidation;
             }
             // System.out.println(field.toString() + "   <>   " + annotations + "\n");
@@ -60,7 +61,7 @@ public class Validations {
                     errorList.put(field.getName(), result.getReason());   
                     // System.out.println(field.getName() + " " + "Invalid");
                     // System.out.println(result.getReason());
-                    // System.out.println(errorList);
+
                 }
             } catch (Exception e) {
                 // TODO: handle exception

@@ -1,8 +1,9 @@
 package app.model;
 
+import app.customeValidate.EmailValidate;
 // import validation.annotation.IsNotEmpty;
 // import validation.annotation.IsPhoneNumber;
-import validation.annotation.*;;
+import validation.annotation.*;
 
 public class User {
 
@@ -12,7 +13,7 @@ public class User {
 
     @IsNotEmpty ( message = "Password is required!")
     @IsNoWhitespace
-    // @IsRegex ( regex = "")
+    @IsRegex ( regex = "")
     private String password;
 
     @IsPhoneNumber
@@ -23,8 +24,8 @@ public class User {
     @IsMaxValue( value = 100 )
     private String age;
 
-    @IsNotEmpty
-    @IsEmailAddress
+    @IsNotEmpty 
+    @IsEmailAddress ( validator = EmailValidate.class)
     @IsNoWhitespace
     private String emailAddress;
 
