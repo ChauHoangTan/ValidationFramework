@@ -5,8 +5,6 @@ import java.lang.reflect.Field;
 import validation.Validation;
 
 public class IsNoWhitespaceValidation extends Validation {
-
-
     
     private Boolean isValid(String value) {
         if(!value.contains(" ")){

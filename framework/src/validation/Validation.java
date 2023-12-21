@@ -3,7 +3,6 @@ package validation;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.function.Predicate;
 
 import validation.ValidationResult.ValidationResult;
 import validation.customeValidate.CustomeValidate;
