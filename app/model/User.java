@@ -13,7 +13,7 @@ public class User {
 
     @IsNotEmpty ( message = "Password is required!")
     @IsNoWhitespace
-    @IsRegex ( regex = "")
+    // @IsRegex ( regex = "")
     private String password;
 
     @IsPhoneNumber
