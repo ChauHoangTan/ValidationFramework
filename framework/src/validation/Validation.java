@@ -42,8 +42,8 @@ public abstract class Validation {
     // self decorator
     // check if it has child validation, validate child fisrt then validate it
     public final ValidationResult validate(String value, Field field) {
-        if (childValidation != null) {
-            ValidationResult chikValidationResult = childValidation.validate(value, field);
+        // if (childValidation != null) {
+        //     ValidationResult chValidationResult = childValidation.validate(value, field);
         try {
             // Sử dụng reflection để lấy giá trị của thuộc tính message
             Method validatorMethod = annotation.annotationType().getMethod("validator");
