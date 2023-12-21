@@ -68,13 +68,13 @@ public abstract class Validation {
                     if (methodCheckValid) {
                         return ValidationResult.valid();
                     } else {
-                        return ValidationResult.inValid(fieldName, getReason());
+                        return ValidationResult.inValid(getReason());
                     }
                 } else {
                     if (methodCheckValid) {
-                        return ValidationResult.inValid(fieldName, childValidationResult.getReason());
+                        return ValidationResult.inValid(childValidationResult.getReason());
                     } else {
-                        return ValidationResult.inValid(fieldName,
+                        return ValidationResult.inValid(
                                 getReason() + "\n" + childValidationResult.getReason());
                     }
                 }
@@ -83,7 +83,7 @@ public abstract class Validation {
                 if (methodCheckValid) {
                     return ValidationResult.valid();
                 } else {
-                    return ValidationResult.inValid(fieldName, getReason());
+                    return ValidationResult.inValid( getReason());
                 }
             }
         } catch (Exception e) {
@@ -95,13 +95,13 @@ public abstract class Validation {
                     if (isValid(value, field)) {
                         return ValidationResult.valid();
                     } else {
-                        return ValidationResult.inValid(fieldName, getReason());
+                        return ValidationResult.inValid( getReason());
                     }
                 } else {
                     if (isValid(value, field)) {
-                        return ValidationResult.inValid(fieldName, childValidationResult.getReason());
+                        return ValidationResult.inValid( childValidationResult.getReason());
                     } else {
-                        return ValidationResult.inValid(fieldName,
+                        return ValidationResult.inValid(
                                 getReason() + "\n" + childValidationResult.getReason());
                     }
                 }
@@ -109,7 +109,7 @@ public abstract class Validation {
                 if (isValid(value, field)) {
                     return ValidationResult.valid();
                 } else {
-                    return ValidationResult.inValid(fieldName, getReason());
+                    return ValidationResult.inValid( getReason());
                 }
             }
         }

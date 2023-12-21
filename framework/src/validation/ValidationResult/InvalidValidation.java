@@ -1,11 +1,9 @@
 package validation.ValidationResult;
 
 public class InvalidValidation extends ValidationResult{
-    private String field;
     private String reason;
 
-    public InvalidValidation(String field, String reason){
-        this.field = field;
+    public InvalidValidation(String reason){
         this.reason = reason;
     }
 

@@ -9,7 +9,7 @@ public abstract class ValidationResult {
         return ValidValidationSingleton.getInstance();
     }
 
-    public static ValidationResult inValid(String field, String reason){
-        return new InvalidValidation(field, reason);
+    public static ValidationResult inValid(String reason){
+        return new InvalidValidation(reason);
     }
 }
