@@ -7,16 +7,12 @@ import app.model.User;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import validation.compositeErrorResult.ErrorInfo;
 import validation.Validations;
 import validation.observerNotification.Observer;
 import validation.strategyNotication.DialogStrategy;
-import validation.strategyNotication.OptionPaneStrategy;
 import validation.strategyNotication.IStrategyNotication;
 
 public class FormSubmit extends JFrame implements Observer {
@@ -227,9 +223,7 @@ public class FormSubmit extends JFrame implements Observer {
     private String formatMesaage(HashMap<String, String> list) {
         String mess = "";
         for (Map.Entry<String, String> entry : list.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            mess += (" - Field: " + key + ", Error: " + value + "\n");
+            mess += (" - Field: " + entry.getKey() + ", Error: " + entry.getValue() + "\n");
         }
         if (mess == "")
             return "Register fail";

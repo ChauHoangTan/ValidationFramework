@@ -5,7 +5,6 @@ import java.util.Map;
 
 import validation.Validation;
 import validation.ValidationType;
-import validation.annotation.IsNumber;
 import validation.impl.*;
 
 public class ValidationFactory{
