@@ -13,7 +13,9 @@ public class User {
 
     @IsNotEmpty ( message = "Password is required!")
     @IsNoWhitespace
-    // @IsRegex ( regex = "")
+    @IsRegex ( regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$" )
+    // 1 letter up/low, 1 number, 1 special char, 8 < length < 20
+
     private String password;
 
     @IsPhoneNumber
