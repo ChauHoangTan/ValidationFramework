@@ -26,40 +26,21 @@ public abstract class Validation {
 
     public void setAnnotation(Annotation annotation){
         this.annotation = annotation;
-        
-
-        // try {
-        //     // Sử dụng reflection để lấy giá trị của thuộc tính message
-        //     Method method = annotation.annotationType().getMethod("message");
-        //     String message = (String)method.invoke(annotation);
-        //     System.err.println();
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
     }
 
     // self decorator
     // check if it has child validation, validate child fisrt then validate it
     public final ValidationResult validate(String value, Field field) {
-        // if (childValidation != null) {
-        //     ValidationResult chikValidationResult = childValidation.validate(value, field);
         try {
             // Sử dụng reflection để lấy giá trị của thuộc tính message
             Method validatorMethod = annotation.annotationType().getMethod("validator");
             Class<? extends CustomeValidate> validator = (Class<? extends CustomeValidate>)validatorMethod.invoke(annotation);
             CustomeValidate cValidate = validator.newInstance();          
-            // if(TrimCustomeValidatorType(cValidate.getClass().toString()).equals("DefaultValidate")){
-            //     System.err.println(false);
-            // }else{
-            //     System.out.println(true);
-            // }
-            // System.err.println(TrimCustomeValidatorType(cValidate.getClass().toString()));
             
             Boolean methodCheckValid = 
                 TrimCustomeValidatorType(cValidate.getClass().toString()).equals("DefaultValidate") ?
                 isValid(value, field) : cValidate.validate(value);
 
-            String fieldName = field.getName();
             if (childValidation != null) {
                 ValidationResult childValidationResult = childValidation.validate(value, field);
 
@@ -86,7 +67,6 @@ public abstract class Validation {
                 }
             }
         } catch (Exception e) {
-            String fieldName = field.getName();
             if (childValidation != null) {
                 ValidationResult childValidationResult = childValidation.validate(value, field);
 
@@ -113,33 +93,6 @@ public abstract class Validation {
             }
         }
 
-        // String fieldName = field.getName();
-        // if (childValidation != null) {
-        //     ValidationResult chikValidationResult = childValidation.validate(value, field);
-
-        //     if (chikValidationResult.isValid()) {
-        //         if (isValid(value, field)) {
-        //             return ValidationResult.valid();
-        //         } else {
-        //             return ValidationResult.inValid(fieldName, getReason());
-        //         }
-        //     } else {
-        //         if (isValid(value, field)) {
-        //             return ValidationResult.inValid(fieldName, chikValidationResult.getReason());
-        //         } else {
-        //             return ValidationResult.inValid(fieldName,
-        //                     getReason() + "\n" + chikValidationResult.getReason());
-        //         }
-        //     }
-        // } else {
-        //     if (isValid(value, field)) {
-        //         return ValidationResult.valid();
-        //     } else {
-        //         return ValidationResult.inValid(fieldName, getReason());
-        //     }
-        // }
-
-        
 
     }
     // protected abstract String getField();
