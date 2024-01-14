@@ -1,4 +1,4 @@
-package app.ui;
+package framework.ui;
 
 import javax.swing.*;
 
@@ -14,6 +14,7 @@ import validation.Validations;
 import validation.observerNotification.Observer;
 import validation.strategyNotication.DialogStrategy;
 import validation.strategyNotication.IStrategyNotication;
+import validation.strategyNotication.OptionPaneStrategy;
 
 public class FormSubmit extends JFrame implements Observer {
 
@@ -43,8 +44,8 @@ public class FormSubmit extends JFrame implements Observer {
 
     public FormSubmit() {
         // errorList = new ArrayList<>();
-        setStrategy(new DialogStrategy());
-        // setStrategy(new OptionPaneStrategy());
+        // setStrategy(new DialogStrategy());
+        setStrategy(new OptionPaneStrategy());
         initComponents();
     }
 

@@ -17,5 +17,5 @@ public @interface IsRegex {
 
     public String regex() default "";
     
-    public Class<? extends CustomeValidate> validator() default DefaultValidate.class;
+    // public Class<? extends CustomeValidate> validator() default DefaultValidate.class;
 }

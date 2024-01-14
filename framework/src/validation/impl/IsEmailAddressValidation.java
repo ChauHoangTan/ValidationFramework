@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.util.regex.Pattern;
 
 import validation.Validation;
-import validation.annotation.IsEmailAddress;
 
 public class IsEmailAddressValidation extends Validation{
 

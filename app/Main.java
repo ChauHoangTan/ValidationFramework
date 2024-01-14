@@ -1,5 +1,5 @@
 package app;
-import app.ui.FormSubmit;
+import framework.ui.FormSubmit;
 import validation.observerNotification.SubjectNotification;
 public class Main {
     public static void main(String[] args) {

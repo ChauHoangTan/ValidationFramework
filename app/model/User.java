@@ -22,12 +22,12 @@ public class User {
     private String phoneNumber;
 
     @IsNumber
-    @IsMinValue( value = 1 )
+    @IsMinValue( value = 10 )
     @IsMaxValue( value = 100 )
     private String age;
 
     @IsNotEmpty 
-    @IsEmailAddress ( validator = EmailValidate.class)
+    @IsEmailAddress ()
     @IsNoWhitespace
     private String emailAddress;
 
